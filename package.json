@@ -6,6 +6,7 @@
     "node": "14.15.0"
   },
   "scripts": {
+    "cli:dev": "ts-node -r dotenv/config src/cli.ts",
     "cli": "ts-node src/cli.ts",
     "test": "jest",
     "lint": "eslint src/ --ext .ts"
@@ -16,6 +17,7 @@
     "@types/node": "^15.12.2",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
+    "dotenv": "^10.0.0",
     "eslint": "^7.28.0",
     "jest": "^27.0.4",
     "ts-jest": "^27.0.3",
