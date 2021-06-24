@@ -5,5 +5,5 @@ declare module 'hatebu-mydata-parser' {
     url: string
     date: Date
   }
-  export function parse (data: string): HatebuData[]
+  export function parse(data: string): HatebuData[]
 }
