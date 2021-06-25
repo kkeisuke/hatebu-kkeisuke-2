@@ -1,13 +1,40 @@
-import { HatebuDate } from '../../../src/domain/value/HatebuDate'
-import { fetchHatebuData } from '../../../src/datasource/api/HatebuApi'
+import { ENV_ERROR_MESSAGE, fetchHatebuData } from '../../../src/datasource/api/HatebuApi'
+import { hatebuDataString } from '../../mock/HatebuDataString'
+import { MOCK_TIMESTAMP, setMockServer } from '../../mock/HatebuServer'
 
 describe('HatebuApi.spec', () => {
-  // タイムアウト時間調整
-  // jest.setTimeout(10000)
+  beforeAll(() => {
+    setMockServer()
+  })
 
-  it('fetchHatebuData', async () => {
-    const yesterday = new HatebuDate(new Date(new Date().setDate(new Date().getDate() - 1))).toString().replace(/\//g, '')
-    const hatebuData = await fetchHatebuData(yesterday)
-    expect(hatebuData.length).not.toBe(0)
+  it('fetchHatebuData ダウンロード成功', async () => {
+    const hatebuData = await fetchHatebuData(MOCK_TIMESTAMP)
+    expect(hatebuData).toBe(hatebuDataString)
+  })
+
+  it('fetchHatebuData ダウンロード失敗', async () => {
+    try {
+      await fetchHatebuData('test')
+    } catch (error) {
+      expect(String(error).includes('Nock: No match for request')).toBe(true)
+    }
+  })
+
+  it('fetchHatebuData 環境変数不備の例外 HATEB_ORIGIN', async () => {
+    try {
+      process.env.HATEB_ORIGIN = ''
+      await fetchHatebuData(MOCK_TIMESTAMP)
+    } catch (error) {
+      expect(error.message).toBe(ENV_ERROR_MESSAGE)
+    }
+  })
+
+  it('fetchHatebuData 環境変数不備の例外 HATEB_PATH', async () => {
+    try {
+      process.env.HATEB_PATH = ''
+      await fetchHatebuData(MOCK_TIMESTAMP)
+    } catch (error) {
+      expect(error.message).toBe(ENV_ERROR_MESSAGE)
+    }
   })
 })

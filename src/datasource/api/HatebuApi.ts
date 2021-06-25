@@ -1,16 +1,18 @@
 import https from 'https'
 
+export const ENV_ERROR_MESSAGE = 'no HATEB_ORIGIN or HATEB_PATH'
+
 /**
  * はてなブックマークデータを取得します。
  * @param timestamp yyyymmddhhmmss書式での日付を指定。指定以降のブックマークデータを取得します。
  * @returns はてなブックマークデータ
  */
 export const fetchHatebuData = (timestamp = ''): Promise<string> => {
-  if (!process.env.HATEB_URL) {
-    console.error('no HATEB_URL')
-    throw new Error('no HATEB_URL')
+  if (!process.env.HATEB_ORIGIN || !process.env.HATEB_PATH) {
+    console.error(ENV_ERROR_MESSAGE)
+    throw new Error(ENV_ERROR_MESSAGE)
   }
-  const path = `${process.env.HATEB_URL}${timestamp ? `?timestamp=${timestamp}` : ''}`
+  const path = `${process.env.HATEB_ORIGIN}${process.env.HATEB_PATH}${timestamp ? `?timestamp=${timestamp}` : ''}`
 
   console.log(`${path} ダウンロード開始`)
 
