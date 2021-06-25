@@ -1,5 +1,5 @@
 import { ENV_ERROR_MESSAGE, fetchHatebuData } from '../../../src/datasource/api/HatebuApi'
-import { hatebuDataString } from '../../mock/HatebuDataString'
+import { HATEBU_DATA_STRING } from '../../mock/HatebuMockData'
 import { MOCK_TIMESTAMP, setMockServer } from '../../mock/HatebuServer'
 
 describe('HatebuApi.spec', () => {
@@ -9,7 +9,7 @@ describe('HatebuApi.spec', () => {
 
   it('fetchHatebuData ダウンロード成功', async () => {
     const hatebuData = await fetchHatebuData(MOCK_TIMESTAMP)
-    expect(hatebuData).toBe(hatebuDataString)
+    expect(hatebuData).toBe(HATEBU_DATA_STRING)
   })
 
   it('fetchHatebuData ダウンロード失敗', async () => {

@@ -1,11 +1,11 @@
 import { HatebuDate } from '../../../src/domain/value/HatebuDate'
 import { getHatebuDailyData, parseData } from '../../../src/domain/service/HatebuService'
-import { hatebuDataString } from '../../mock/HatebuDataString'
+import { HATEBU_DATA_STRING } from '../../mock/HatebuMockData'
 import { setMockServer } from '../../mock/HatebuServer'
 
 describe('HatebuService.spec', () => {
   describe('parseData パース成功', () => {
-    const hatebuDataByDate = parseData(hatebuDataString)
+    const hatebuDataByDate = parseData(HATEBU_DATA_STRING)
 
     it('キーが存在する', () => {
       expect(hatebuDataByDate.has('2021-06-23')).toBe(true)

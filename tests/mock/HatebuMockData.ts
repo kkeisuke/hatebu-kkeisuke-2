@@ -1,0 +1,24 @@
+export const HATEBU_DATA_STRING = `
+TITLE1
+COMMENT1
+URL1
+TITLE2
+COMMENT2
+URL2
+10	20210624135245
+20	20210623174628
+`
+
+export const MOCK_MARKDOWN = `---
+title: 2021-06-24
+date: 2021-06-24
+description: B! 1
+---
+
+#### TITLE
+URL<br>
+2021/06/24 09:00:00<br>
+COMMIT
+
+
+`
