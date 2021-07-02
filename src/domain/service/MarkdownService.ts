@@ -3,6 +3,12 @@ import type { HatebuData } from 'hatebu-mydata-parser'
 import { HatebuDate } from '../value/HatebuDate'
 import { HatebuDataByDate } from './HatebuService'
 
+export type HatebuMarkdowns = {
+  objectID: string // for Algolia
+  path: string
+  content: string
+}
+
 export const MD_FILE_PATH = 'tmp'
 
 /**
@@ -53,4 +59,26 @@ export const createMarkdownFile = (dataByDate: HatebuDataByDate): void => {
       }
     })
   })
+}
+
+/**
+ * GitHub用にマークダウンデータを作成します。
+ * @param dataByDate パースされたはてなブックマークデータ
+ * @returns GitHub に push する配列
+ */
+export const createMarkdownsForGitHub = (dataByDate: HatebuDataByDate): HatebuMarkdowns[] => {
+  const markdowns: HatebuMarkdowns[] = []
+
+  // 日毎
+  dataByDate.forEach((data, date) => {
+    // Markdown 作成
+    markdowns.push({
+      objectID: date,
+      path: `${process.env.GITHUB_PATH}/${date}.md`,
+      content: createMarkdown(date, data)
+    })
+    console.log(`${date}.md を作成しました`)
+  })
+
+  return markdowns
 }

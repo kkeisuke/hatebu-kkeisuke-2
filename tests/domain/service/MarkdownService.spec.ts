@@ -1,6 +1,6 @@
 import fs from 'fs'
 import type { HatebuData } from 'hatebu-mydata-parser'
-import { createMarkdown, createMarkdownFile, MD_FILE_PATH } from '../../../src/domain/service/MarkdownService'
+import { createMarkdown, createMarkdownFile, createMarkdownsForGitHub, HatebuMarkdowns, MD_FILE_PATH } from '../../../src/domain/service/MarkdownService'
 import { MOCK_MARKDOWN } from '../../mock/HatebuMockData'
 
 describe('MarkdownService.spec', () => {
@@ -20,25 +20,45 @@ describe('MarkdownService.spec', () => {
   ]
 
   describe('createMarkdown', () => {
-    it('マークダウン作成', () => {
+    it('markdown 作成', () => {
       const markdown = createMarkdown('2021-06-24', bookmarks)
 
       expect(markdown).toBe(MOCK_MARKDOWN)
     })
   })
+
   describe('createMarkdownFile', () => {
     let callback: fs.NoParamCallback
     jest.spyOn(fs, 'writeFile').mockImplementation((_, __, cb) => {
       callback = cb
     })
 
-    it('マークダウンを作成してファイルを書き込む', () => {
-      const dataByDate = new Map<string, HatebuData[]>()
-      const date = '2021-06-24'
-      dataByDate.set(date, bookmarks)
+    const dataByDate = new Map<string, HatebuData[]>()
+    const date = '2021-06-24'
+    dataByDate.set(date, bookmarks)
+
+    it('markdown を作成してファイルを書き込む', () => {
       createMarkdownFile(dataByDate)
 
       expect(fs.writeFile).toBeCalledWith(`./${MD_FILE_PATH}/${date}.md`, MOCK_MARKDOWN, callback)
+    })
+  })
+
+  describe('createMarkdownsForGitHub', () => {
+    const dataByDate = new Map<string, HatebuData[]>()
+    const date = '2021-06-24'
+    dataByDate.set(date, bookmarks)
+
+    it('GitHub 用の markdown 配列を作成する', () => {
+      const markdowns = createMarkdownsForGitHub(dataByDate)
+
+      expect(markdowns).toStrictEqual([
+        {
+          objectID: date,
+          path: `${process.env.GITHUB_PATH}/${date}.md`,
+          content: MOCK_MARKDOWN
+        } as HatebuMarkdowns
+      ])
     })
   })
 })
