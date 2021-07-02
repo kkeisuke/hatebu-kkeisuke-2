@@ -1,9 +1,10 @@
 import cac from 'cac'
+import { createHatebuToMarkdown } from './application/HatebuToMarkdownApp'
 
 const cli = cac()
 
 cli.command('date', 'ローカルで Markdown ファイルをビルドします。').action(() => {
-  console.log('date')
+  createHatebuToMarkdown(cli.args[0])
 })
 
 cli.command('push', 'Markdown ファイルを GitHub に push します。').action(() => {
