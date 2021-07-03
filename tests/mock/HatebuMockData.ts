@@ -28,3 +28,17 @@ COMMIT2
 
 
 `
+export const hatebuData = [
+  {
+    title: 'TITLE',
+    comment: 'COMMIT',
+    url: 'URL',
+    date: new Date('2021-06-24')
+  },
+  {
+    title: 'TITLE2',
+    comment: 'COMMIT2',
+    url: 'URL2',
+    date: new Date('2021-06-23')
+  }
+]

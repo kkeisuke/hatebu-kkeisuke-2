@@ -3,7 +3,7 @@ import type { HatebuData } from 'hatebu-mydata-parser'
 import { HatebuDate } from '../value/HatebuDate'
 import { HatebuDataByDate } from './HatebuService'
 
-export type HatebuMarkdowns = {
+export type HatebuMarkdown = {
   objectID: string // for Algolia
   path: string
   content: string
@@ -66,8 +66,8 @@ export const createMarkdownFile = (dataByDate: HatebuDataByDate): void => {
  * @param dataByDate パースされたはてなブックマークデータ
  * @returns GitHub に push する配列
  */
-export const createMarkdownsForGitHub = (dataByDate: HatebuDataByDate): HatebuMarkdowns[] => {
-  const markdowns: HatebuMarkdowns[] = []
+export const createMarkdownsForGitHub = (dataByDate: HatebuDataByDate): HatebuMarkdown[] => {
+  const markdowns: HatebuMarkdown[] = []
 
   // 日毎
   dataByDate.forEach((data, date) => {

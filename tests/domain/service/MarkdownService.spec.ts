@@ -1,27 +1,12 @@
 import fs from 'fs'
 import type { HatebuData } from 'hatebu-mydata-parser'
-import { createMarkdown, createMarkdownFile, createMarkdownsForGitHub, HatebuMarkdowns, MD_FILE_PATH } from '../../../src/domain/service/MarkdownService'
-import { MOCK_MARKDOWN } from '../../mock/HatebuMockData'
+import { createMarkdown, createMarkdownFile, createMarkdownsForGitHub, HatebuMarkdown, MD_FILE_PATH } from '../../../src/domain/service/MarkdownService'
+import { hatebuData, MOCK_MARKDOWN } from '../../mock/HatebuMockData'
 
 describe('MarkdownService.spec', () => {
-  const bookmarks: HatebuData[] = [
-    {
-      title: 'TITLE',
-      comment: 'COMMIT',
-      url: 'URL',
-      date: new Date('2021-06-24')
-    },
-    {
-      title: 'TITLE2',
-      comment: 'COMMIT2',
-      url: 'URL2',
-      date: new Date('2021-06-23')
-    }
-  ]
-
   describe('createMarkdown', () => {
     it('markdown 作成', () => {
-      const markdown = createMarkdown('2021-06-24', bookmarks)
+      const markdown = createMarkdown('2021-06-24', hatebuData)
 
       expect(markdown).toBe(MOCK_MARKDOWN)
     })
@@ -35,7 +20,7 @@ describe('MarkdownService.spec', () => {
 
     const dataByDate = new Map<string, HatebuData[]>()
     const date = '2021-06-24'
-    dataByDate.set(date, bookmarks)
+    dataByDate.set(date, hatebuData)
 
     it('markdown を作成してファイルを書き込む', () => {
       createMarkdownFile(dataByDate)
@@ -47,7 +32,7 @@ describe('MarkdownService.spec', () => {
   describe('createMarkdownsForGitHub', () => {
     const dataByDate = new Map<string, HatebuData[]>()
     const date = '2021-06-24'
-    dataByDate.set(date, bookmarks)
+    dataByDate.set(date, hatebuData)
 
     it('GitHub 用の markdown 配列を作成する', () => {
       const markdowns = createMarkdownsForGitHub(dataByDate)
@@ -57,7 +42,7 @@ describe('MarkdownService.spec', () => {
           objectID: date,
           path: `${process.env.GITHUB_PATH}/${date}.md`,
           content: MOCK_MARKDOWN
-        } as HatebuMarkdowns
+        } as HatebuMarkdown
       ])
     })
   })
