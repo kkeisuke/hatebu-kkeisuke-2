@@ -1,6 +1,7 @@
 import fs from 'fs'
 import type { HatebuData } from 'hatebu-mydata-parser'
-import { createMarkdown, createMarkdownFile, createMarkdownsForGitHub, HatebuMarkdown, MD_FILE_PATH } from '../../../src/domain/service/MarkdownService'
+import { HatebuMarkdown } from '../../../src/domain/entity/HatebuMarkdown'
+import { createMarkdown, createMarkdownFile, createMarkdownsForGitHub, MD_FILE_PATH } from '../../../src/domain/service/MarkdownService'
 import { hatebuData, MOCK_MARKDOWN } from '../../mock/HatebuMockData'
 
 describe('MarkdownService.spec', () => {

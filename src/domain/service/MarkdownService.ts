@@ -1,13 +1,8 @@
 import { writeFile } from 'fs'
 import type { HatebuData } from 'hatebu-mydata-parser'
+import { HatebuMarkdown } from '../entity/HatebuMarkdown'
 import { HatebuDate } from '../value/HatebuDate'
 import { HatebuDataByDate } from './HatebuService'
-
-export type HatebuMarkdown = {
-  objectID: string // for Algolia
-  path: string
-  content: string
-}
 
 export const MD_FILE_PATH = 'tmp'
 
