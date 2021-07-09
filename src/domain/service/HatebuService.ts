@@ -1,8 +1,7 @@
-import { HatebuData, parse } from 'hatebu-mydata-parser'
+import { parse } from 'hatebu-mydata-parser'
 import { fetchHatebuData } from '../../datasource/api/HatebuApi'
+import { HatebuDataByDate } from '../entity/HatebuData'
 import { HatebuDate } from '../value/HatebuDate'
-
-export type HatebuDataByDate = Map<string, HatebuData[]>
 
 /**
  * parser でパース後に日毎データに整形
