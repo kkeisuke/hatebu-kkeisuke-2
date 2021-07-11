@@ -9,7 +9,8 @@
     "cli:dev": "ts-node -r dotenv/config src/cli.ts",
     "cli": "ts-node src/cli.ts",
     "test": "jest",
-    "lint": "prettier --write . --loglevel warn && eslint src/ --ext .js,.ts --fix"
+    "test:ci": "jest --silent",
+    "lint": "prettier --write . --loglevel warn && eslint ./ --ext .js,.ts --fix"
   },
   "license": "MIT",
   "devDependencies": {
