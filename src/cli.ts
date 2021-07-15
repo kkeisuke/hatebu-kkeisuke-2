@@ -1,4 +1,5 @@
 import cac from 'cac'
+import { saveToAlgolia } from './application/HatebuMarkdownToAlgoliaApp'
 import { pushToGitHub } from './application/HatebuMarkdownToGitHubApp'
 import { createHatebuToMarkdown } from './application/HatebuToMarkdownApp'
 
@@ -20,8 +21,12 @@ cli.command('push', 'Markdown ファイルを GitHub に push します。').act
   }
 })
 
-cli.command('algolia', 'Algolia へ json データを追加します。').action(() => {
-  console.log('algolia')
+cli.command('algolia', 'Algolia へ json データを追加します。').action(async () => {
+  try {
+    await saveToAlgolia(cli.args[0])
+  } catch (error) {
+    process.exit(1)
+  }
 })
 
 cli.parse()
