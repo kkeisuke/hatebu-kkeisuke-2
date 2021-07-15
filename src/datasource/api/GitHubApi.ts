@@ -1,5 +1,9 @@
 import { Octokit, RestEndpointMethodTypes } from '@octokit/rest'
-import { HatebuMarkdown } from '../../domain/entity/HatebuMarkdown'
+
+type Markdown = {
+  path: string
+  content: string
+}
 
 type Tree = RestEndpointMethodTypes['git']['createTree']['parameters']['tree']
 type ResTrees = RestEndpointMethodTypes['git']['createTree']['response']['data']['tree']
@@ -62,7 +66,7 @@ export class GitHubApi {
    * @param markdowns マークダウンファイルの配列
    * @returns 新しい tree
    */
-  async createBlob(markdowns: HatebuMarkdown[]): Promise<Tree> {
+  async createBlob(markdowns: Markdown[]): Promise<Tree> {
     const newTree: Tree = []
     for (const md of markdowns) {
       const content = Buffer.from(md.content).toString()
@@ -115,7 +119,7 @@ export class GitHubApi {
  * マークダウンファイルを GitHub のリポジトリへ push します。
  * @param markdowns マークダウンファイルの配列
  */
-export const push = async (markdowns: HatebuMarkdown[]): Promise<void> => {
+export const push = async (markdowns: Markdown[]): Promise<void> => {
   try {
     const api = new GitHubApi(process.env.GITHUB_API_TOKEN || '')
     const { latestSha, baseTree } = await api.getLatestCommit()
