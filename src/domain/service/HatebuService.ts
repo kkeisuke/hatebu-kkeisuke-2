@@ -24,7 +24,7 @@ export const parseData = (hatebuData: string): HatebuDataByDate => {
   if (dataByDate.size) {
     console.log(`${dataByDate.size}件のデータをパースしました。`)
   } else {
-    console.error('はてなブックマークデータをパースできませんでした。')
+    console.log('はてなブックマークデータをパースできませんでした。')
   }
 
   return dataByDate

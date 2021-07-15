@@ -28,6 +28,11 @@ describe('MarkdownService.spec', () => {
 
       expect(fs.writeFile).toBeCalledWith(`./${MD_FILE_PATH}/${date}.md`, MOCK_MARKDOWN, callback)
     })
+
+    it('データがない場合', async () => {
+      const result = await createMarkdownFile(new Map())
+      expect(result.length).toBe(0)
+    })
   })
 
   describe('createMarkdownsForGitHub', () => {

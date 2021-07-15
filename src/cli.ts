@@ -4,8 +4,12 @@ import { createHatebuToMarkdown } from './application/HatebuToMarkdownApp'
 
 const cli = cac()
 
-cli.command('date', 'ローカルで Markdown ファイルをビルドします。').action(() => {
-  createHatebuToMarkdown(cli.args[0])
+cli.command('date', 'ローカルで Markdown ファイルをビルドします。').action(async () => {
+  try {
+    await createHatebuToMarkdown(cli.args[0])
+  } catch (error) {
+    process.exit(1)
+  }
 })
 
 cli.command('push', 'Markdown ファイルを GitHub に push します。').action(() => {

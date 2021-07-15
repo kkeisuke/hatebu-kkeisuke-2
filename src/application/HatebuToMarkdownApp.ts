@@ -7,5 +7,5 @@ import { createMarkdownFile } from '../domain/service/MarkdownService'
  */
 export const createHatebuToMarkdown = async (date: string): Promise<void> => {
   const dairyDatas = await getHatebuDailyData(date)
-  createMarkdownFile(dairyDatas)
+  await createMarkdownFile(dairyDatas)
 }

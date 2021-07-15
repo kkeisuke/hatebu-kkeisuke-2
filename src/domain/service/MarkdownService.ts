@@ -40,20 +40,28 @@ ${comment}
  * Markdown ファイルを作成します。
  * @param dataByDate パースされたはてなブックマークデータ
  */
-export const createMarkdownFile = (dataByDate: HatebuDataByDate): void => {
+export const createMarkdownFile = (dataByDate: HatebuDataByDate): Promise<void[]> => {
+  const promises: Promise<void>[] = []
   dataByDate.forEach((data, date) => {
     // Markdown 作成
     const markdown = createMarkdown(date, data)
-    // .md ファイル作成
-    writeFile(`./${MD_FILE_PATH}/${date}.md`, markdown, (error) => {
-      if (error) {
-        console.error(`${date}.md ファイルが作成できませんでした`)
-        console.error(error)
-      } else {
-        console.log(`${date}.md ファイルを作成しました`)
-      }
-    })
+    promises.push(
+      new Promise((resolve, reject) => {
+        // .md ファイル作成
+        writeFile(`./${MD_FILE_PATH}/${date}.md`, markdown, (error) => {
+          if (error) {
+            console.error(`${date}.md ファイルが作成できませんでした`)
+            console.error(error)
+            reject()
+          } else {
+            console.log(`${date}.md ファイルを作成しました`)
+            resolve()
+          }
+        })
+      })
+    )
   })
+  return Promise.all(promises)
 }
 
 /**
