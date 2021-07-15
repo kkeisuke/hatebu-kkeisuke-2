@@ -12,8 +12,12 @@ cli.command('date', 'ローカルで Markdown ファイルをビルドします�
   }
 })
 
-cli.command('push', 'Markdown ファイルを GitHub に push します。').action(() => {
-  pushToGitHub(cli.args[0])
+cli.command('push', 'Markdown ファイルを GitHub に push します。').action(async () => {
+  try {
+    await pushToGitHub(cli.args[0])
+  } catch (error) {
+    process.exit(1)
+  }
 })
 
 cli.command('algolia', 'Algolia へ json データを追加します。').action(() => {

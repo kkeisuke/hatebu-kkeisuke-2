@@ -8,6 +8,6 @@ import { createMarkdownsForGitHub } from '../domain/service/MarkdownService'
  */
 export const pushToGitHub = async (date: string): Promise<void> => {
   const dairyDatas = await getHatebuDailyData(date)
-  const markdowns = await createMarkdownsForGitHub(dairyDatas)
+  const markdowns = createMarkdownsForGitHub(dairyDatas)
   await pushHatebuMarkdown(markdowns)
 }
