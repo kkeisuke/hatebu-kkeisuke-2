@@ -18,10 +18,10 @@ describe('AlgoliaApi', () => {
     })
   })
   describe('saveObjects', () => {
-    it('インデックス名が無い', () => {
+    it('インデックス名が無い', async () => {
       try {
         const api = new AlgoliaApi(process.env.ALGOLIA_APPLICATION, process.env.ALGOLIA_API_KEY)
-        api.saveObjects('', [{ objectID: '' }])
+        await api.saveObjects('', [{ objectID: '' }])
       } catch (error) {
         expect(error.message).toBe(ALGOLIA_INDEX_ERROR)
       }

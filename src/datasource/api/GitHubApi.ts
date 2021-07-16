@@ -1,12 +1,12 @@
 import { Octokit, RestEndpointMethodTypes } from '@octokit/rest'
 
+type Tree = RestEndpointMethodTypes['git']['createTree']['parameters']['tree']
+type ResTrees = RestEndpointMethodTypes['git']['createTree']['response']['data']['tree']
+
 type Markdown = {
   path: string
   content: string
 }
-
-type Tree = RestEndpointMethodTypes['git']['createTree']['parameters']['tree']
-type ResTrees = RestEndpointMethodTypes['git']['createTree']['response']['data']['tree']
 
 const owner = process.env.GITHUB_OWNER || ''
 const repo = process.env.GITHUB_REPO || ''
@@ -47,8 +47,6 @@ export class GitHubApi {
     const commit_sha = latestRef.data.object.sha
     console.log('commit_sha', commit_sha)
 
-    // Get the current commit object
-    // Retrieve the tree it points to
     const latestCommit = await this.octokit.git.getCommit({ owner, repo, commit_sha })
     const latestSha = latestCommit.data.sha
     const baseTree = latestCommit.data.tree.sha
@@ -56,7 +54,7 @@ export class GitHubApi {
     console.log('baseTree', baseTree)
 
     return {
-      latestSha: latestCommit.data.sha,
+      latestSha,
       baseTree
     }
   }
@@ -109,7 +107,6 @@ export class GitHubApi {
     const sha = newCommit.data.sha
     console.log('SHA1', sha)
 
-    // Update the reference of your branch to point to the new commit SHA
     const { data } = await this.octokit.git.updateRef({ owner, repo, ref, sha })
     console.log('SHA1', data.object.sha)
   }
@@ -122,17 +119,12 @@ export class GitHubApi {
 export const push = async (markdowns: Markdown[]): Promise<void> => {
   try {
     const api = new GitHubApi(process.env.GITHUB_API_TOKEN || '')
+
     const { latestSha, baseTree } = await api.getLatestCommit()
-
-    // Retrieve the content of the blob object that tree has for that particular file path
-    // Change the content somehow and post a new blob object with that new content, getting a blob SHA back
     const newTree = await api.createBlob(markdowns)
-
-    // Post a new tree object with that file path pointer replaced with your new blob SHA getting a tree SHA back
     const { tree } = await api.createTree(newTree, baseTree)
 
-    // Create a new commit object with the current commit SHA as the parent and the new tree SHA, getting a commit SHA back
-    api.createCommit(latestSha, tree)
+    await api.createCommit(latestSha, tree)
 
     console.log('push 成功しました。')
   } catch (error) {

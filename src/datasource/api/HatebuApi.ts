@@ -10,7 +10,7 @@ export const ENV_ERROR_MESSAGE = 'no HATEB_ORIGIN or HATEB_PATH'
 export const fetchHatebuData = (timestamp = ''): Promise<string> => {
   if (!process.env.HATEB_ORIGIN || !process.env.HATEB_PATH) {
     console.error(ENV_ERROR_MESSAGE)
-    throw new Error(ENV_ERROR_MESSAGE)
+    return Promise.reject(ENV_ERROR_MESSAGE)
   }
   const path = `${process.env.HATEB_ORIGIN}${process.env.HATEB_PATH}${timestamp ? `?timestamp=${timestamp}` : ''}`
 

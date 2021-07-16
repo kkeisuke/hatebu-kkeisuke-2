@@ -25,7 +25,7 @@ describe('HatebuApi.spec', () => {
       process.env.HATEB_ORIGIN = ''
       await fetchHatebuData(MOCK_TIMESTAMP)
     } catch (error) {
-      expect(error.message).toBe(ENV_ERROR_MESSAGE)
+      expect(error).toBe(ENV_ERROR_MESSAGE)
     }
   })
 
@@ -34,7 +34,7 @@ describe('HatebuApi.spec', () => {
       process.env.HATEB_PATH = ''
       await fetchHatebuData(MOCK_TIMESTAMP)
     } catch (error) {
-      expect(error.message).toBe(ENV_ERROR_MESSAGE)
+      expect(error).toBe(ENV_ERROR_MESSAGE)
     }
   })
 })
