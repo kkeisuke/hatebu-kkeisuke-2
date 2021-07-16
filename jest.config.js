@@ -5,7 +5,7 @@ const config = {
   roots: ['<rootDir>/tests'],
   testMatch: ['**/?(*.)spec.ts'],
   setupFiles: ['dotenv/config'],
-  setupFilesAfterEnv: ['./jest.setup.ts']
+  setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts']
 }
 
 module.exports = config
