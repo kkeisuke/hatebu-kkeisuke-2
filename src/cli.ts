@@ -29,4 +29,6 @@ cli.command('algolia', 'Algolia へ json データを追加します。').action
   }
 })
 
+cli.help()
+
 cli.parse()
