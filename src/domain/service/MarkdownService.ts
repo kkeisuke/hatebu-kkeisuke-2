@@ -13,7 +13,7 @@ export const MD_FILE_PATH = 'tmp'
  * @returns Markdown 文字列
  */
 export const createMarkdown = (date: string, bookmarks: HatebuData[]): string => {
-  const markdown = `---
+  const header = `---
 title: ${date}
 date: ${date}
 description: B! ${bookmarks.length}
@@ -21,11 +21,11 @@ description: B! ${bookmarks.length}
 `
 
   // ブックマーク毎
-  const bookmarkMarkdowns: string[] = []
+  const body: string[] = []
   bookmarks.forEach((bookmark) => {
     const comment = bookmark.comment ? `${bookmark.comment}\n` : ''
     const date = new HatebuDate(bookmark.date).toStringDateTime()
-    bookmarkMarkdowns.push(`#### ${bookmark.title}
+    body.push(`#### ${bookmark.title}
 ${bookmark.url}<br>
 ${date}<br>
 ${comment}
@@ -33,7 +33,7 @@ ${comment}
 `)
   })
 
-  return markdown + '\n' + bookmarkMarkdowns.join('')
+  return header + '\n' + body.join('')
 }
 
 /**
