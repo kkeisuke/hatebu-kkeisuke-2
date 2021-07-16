@@ -7,10 +7,11 @@
   },
   "scripts": {
     "cli:dev": "ts-node -r dotenv/config src/cli.ts",
-    "cli": "ts-node -T src/cli.ts",
+    "cli": "dist/cli.js",
     "test": "jest",
     "test:ci": "jest --silent",
-    "lint": "prettier --write . --loglevel warn && eslint ./ --ext .js,.ts --fix"
+    "lint": "prettier --write . --loglevel warn && eslint ./ --ext .js,.ts --fix",
+    "build": "esbuild src/cli.ts --bundle --platform=node --target=node14.17.3 --minify --outfile=dist/cli.js"
   },
   "license": "MIT",
   "devDependencies": {
@@ -19,6 +20,7 @@
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "dotenv": "^10.0.0",
+    "esbuild": "^0.12.15",
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "jest": "^27.0.6",
