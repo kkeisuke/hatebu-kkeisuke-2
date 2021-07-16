@@ -28,17 +28,17 @@ https://github.com/kkeisuke/hatebu-kkeisuke-cli
 # 指定日時以降の markdown ファイルをローカルに作成します。
 # 日時を省略した場合は前日が指定されます。
 # 例：npm run date 20210715
-npm run date <日時>
+npm run cli date <日時>
 
 # 指定日時以降の markdown ファイルを GitHub に push します。
 # 日時を省略した場合は前日が指定されます。
 # 例：npm run push 20210715
-npm run push <日時>
+npm run cli push <日時>
 
 # 指定日時以降の markdown を Algolia index に追加します。
 # 日時を省略した場合は前日が指定されます。
 # 例：npm run algolia 20210715
-npm run algolia <日時>
+npm run cli algolia <日時>
 
 # coming soon
 # 全ブックマークデータを対象に markdown ファイルをローカルに作成します。
