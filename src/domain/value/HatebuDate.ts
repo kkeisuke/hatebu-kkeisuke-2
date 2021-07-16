@@ -3,7 +3,7 @@ export class HatebuDate {
 
   /**
    * はてなブックマーク日
-   * @param date ブックマーク日
+   * @param date ブックマークした日
    */
   constructor(date: Date) {
     this.date = date
