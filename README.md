@@ -17,6 +17,7 @@ https://hatebu.kkeisuke.com/
 ## 検索 Web アプリ、CLI ツール
 
 https://github.com/kkeisuke/hatebu-kkeisuke-search
+
 https://github.com/kkeisuke/hatebu-kkeisuke-cli
 
 ## セットアップ & ビルド
