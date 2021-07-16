@@ -8,7 +8,6 @@ describe('MarkdownService.spec', () => {
   describe('createMarkdown', () => {
     it('markdown 作成', () => {
       const markdown = createMarkdown('2021-06-24', hatebuData)
-
       expect(markdown).toBe(MOCK_MARKDOWN)
     })
   })
@@ -25,7 +24,6 @@ describe('MarkdownService.spec', () => {
 
     it('markdown を作成してファイルを書き込む', () => {
       createMarkdownFile(dataByDate)
-
       expect(fs.writeFile).toBeCalledWith(`./${MD_FILE_PATH}/${date}.md`, MOCK_MARKDOWN, callback)
     })
 
@@ -42,7 +40,6 @@ describe('MarkdownService.spec', () => {
 
     it('GitHub 用の markdown 配列を作成する', () => {
       const markdowns = createMarkdownsForGitHub(dataByDate)
-
       expect(markdowns).toStrictEqual([
         {
           objectID: date,

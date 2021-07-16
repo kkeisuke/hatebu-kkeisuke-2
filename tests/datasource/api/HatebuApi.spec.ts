@@ -21,20 +21,26 @@ describe('HatebuApi.spec', () => {
   })
 
   it('fetchHatebuData 環境変数不備の例外 HATEB_ORIGIN', async () => {
+    const temp = process.env.HATEB_ORIGIN
     try {
       process.env.HATEB_ORIGIN = ''
       await fetchHatebuData(MOCK_TIMESTAMP)
     } catch (error) {
       expect(error).toBe(ENV_ERROR_MESSAGE)
+    } finally {
+      process.env.HATEB_ORIGIN = temp
     }
   })
 
   it('fetchHatebuData 環境変数不備の例外 HATEB_PATH', async () => {
+    const temp = process.env.HATEB_PATH
     try {
       process.env.HATEB_PATH = ''
       await fetchHatebuData(MOCK_TIMESTAMP)
     } catch (error) {
       expect(error).toBe(ENV_ERROR_MESSAGE)
+    } finally {
+      process.env.HATEB_PATH = temp
     }
   })
 })
