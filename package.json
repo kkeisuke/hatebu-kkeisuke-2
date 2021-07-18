@@ -7,7 +7,6 @@
   },
   "scripts": {
     "cli:dev": "ts-node -r dotenv/config src/cli.ts",
-    "cli": "dist/cli.js",
     "test": "jest",
     "test:ci": "jest --silent",
     "lint": "prettier --write . --loglevel warn && eslint ./ --ext .js,.ts --fix",
