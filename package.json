@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "kkeisuke's はてなブックマーク まとめサイトジェネレータ",
   "engines": {
-    "node": "14.17.3"
+    "node": "14.17.5"
   },
   "scripts": {
     "cli:dev": "ts-node -r dotenv/config src/cli.ts",
