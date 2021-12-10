@@ -25,7 +25,7 @@ description: B! ${bookmarks.length}
   bookmarks.forEach((bookmark) => {
     const comment = bookmark.comment ? `${bookmark.comment}\n` : ''
     const date = new HatebuDate(bookmark.date).toStringDateTime()
-    body.push(`#### ${bookmark.title}
+    body.push(`#### ${bookmark.title.replaceAll('<', '&lt;').replaceAll('>', '&gt;')}
 ${bookmark.url}<br>
 ${date}<br>
 ${comment}
