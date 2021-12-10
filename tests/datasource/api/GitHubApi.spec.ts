@@ -7,6 +7,9 @@ describe('GitHubApi', () => {
       try {
         new GitHubApi('')
       } catch (error) {
+        if (!(error instanceof Error)) {
+          return
+        }
         expect(error.message).toBe(GITHUB_API_TOKEN_ERROR)
       }
     })

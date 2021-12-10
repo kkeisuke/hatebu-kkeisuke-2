@@ -6,6 +6,9 @@ describe('AlgoliaApi', () => {
       try {
         new AlgoliaApi('', process.env.ALGOLIA_API_KEY)
       } catch (error) {
+        if (!(error instanceof Error)) {
+          return
+        }
         expect(error.message).toBe(ALGOLIA_APPLICATION_ERROR)
       }
     })
@@ -13,6 +16,9 @@ describe('AlgoliaApi', () => {
       try {
         new AlgoliaApi(process.env.ALGOLIA_APPLICATION, '')
       } catch (error) {
+        if (!(error instanceof Error)) {
+          return
+        }
         expect(error.message).toBe(ALGOLIA_API_KEY_ERROR)
       }
     })
@@ -23,6 +29,9 @@ describe('AlgoliaApi', () => {
         const api = new AlgoliaApi(process.env.ALGOLIA_APPLICATION, process.env.ALGOLIA_API_KEY)
         await api.saveObjects('', [{ objectID: '' }])
       } catch (error) {
+        if (!(error instanceof Error)) {
+          return
+        }
         expect(error.message).toBe(ALGOLIA_INDEX_ERROR)
       }
     })
