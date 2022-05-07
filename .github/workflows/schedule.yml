@@ -1,6 +1,5 @@
 name: schedule
 on:
-  workflow_dispatch:
   schedule:
     - cron: '30 15 * * *'
 jobs:
