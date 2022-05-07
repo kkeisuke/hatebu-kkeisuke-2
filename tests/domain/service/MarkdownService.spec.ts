@@ -43,7 +43,7 @@ describe('MarkdownService.spec', () => {
       expect(markdowns).toStrictEqual([
         {
           objectID: date,
-          path: `${process.env.GITHUB_PATH}/${date}.md`,
+          path: `${process.env.REMOTE_PATH}/${date}.md`,
           content: MOCK_MARKDOWN
         } as HatebuMarkdown
       ])

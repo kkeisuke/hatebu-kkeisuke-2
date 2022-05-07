@@ -22,7 +22,7 @@ https://github.com/kkeisuke/hatebu-kkeisuke-cli
 
 ## セットアップ & ビルド
 
-環境変数は `.env.copy` から `.env` を作成し、`GITHUB_API_TOKEN` などを追加します。
+環境変数は `.env.copy` から `.env` を作成し、`REMOTE_API_TOKEN` などを追加します。
 
 ```shell
 # dist/cli.js ファイルを出力します

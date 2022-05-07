@@ -8,12 +8,12 @@ type Markdown = {
   content: string
 }
 
-const owner = process.env.GITHUB_OWNER || ''
-const repo = process.env.GITHUB_REPO || ''
-const ref = process.env.GITHUB_REF || ''
+const owner = process.env.REMOTE_OWNER || ''
+const repo = process.env.REMOTE_REPO || ''
+const ref = process.env.REMOTE_REF || ''
 const message = process.env.COMMIT_MSG || ''
 
-export const GITHUB_API_TOKEN_ERROR = 'GITHUB_API_TOKEN がありません'
+export const REMOTE_API_TOKEN_ERROR = 'REMOTE_API_TOKEN がありません'
 
 export class GitHubApi {
   octokit: Octokit
@@ -33,7 +33,7 @@ export class GitHubApi {
    */
   private authenticate(token: string): Octokit {
     if (!token) {
-      throw new Error(GITHUB_API_TOKEN_ERROR)
+      throw new Error(REMOTE_API_TOKEN_ERROR)
     }
     return new Octokit({ auth: token })
   }
@@ -118,7 +118,7 @@ export class GitHubApi {
  */
 export const push = async (markdowns: Markdown[]): Promise<void> => {
   try {
-    const api = new GitHubApi(process.env.GITHUB_API_TOKEN || '')
+    const api = new GitHubApi(process.env.REMOTE_API_TOKEN || '')
 
     const { latestSha, baseTree } = await api.getLatestCommit()
     const newTree = await api.createBlob(markdowns)
