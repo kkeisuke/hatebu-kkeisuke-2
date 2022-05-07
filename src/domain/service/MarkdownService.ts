@@ -77,7 +77,7 @@ export const createMarkdownsForGitHub = (dataByDate: HatebuDataByDate): HatebuMa
     // Markdown 作成
     markdowns.push({
       objectID: date,
-      path: `${process.env.REMOTE_PATH}/${date}.md`,
+      path: `${process.env.GITHUB_PATH}/${date}.md`,
       content: createMarkdown(date, data)
     })
     console.log(`${date}.md を作成しました`)
