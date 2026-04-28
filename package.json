@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "kkeisuke's はてなブックマーク まとめサイトジェネレータ",
   "engines": {
-    "node": "16.13.1"
+    "node": "24.15.0"
   },
   "scripts": {
     "cli:dev": "ts-node -r dotenv/config src/cli.ts",
@@ -11,7 +11,7 @@
     "test:ci": "jest --silent",
     "lint": "prettier --write . --loglevel warn && eslint ./ --ext .js,.ts --fix",
     "typecheck": "tsc --noEmit",
-    "build": "esbuild src/cli.ts --bundle --platform=node --target=node16.13.1 --minify --outfile=dist/cli.js"
+    "build": "esbuild src/cli.ts --bundle --platform=node --target=node24.15.0 --minify --outfile=dist/cli.js"
   },
   "license": "MIT",
   "devDependencies": {
