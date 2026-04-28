@@ -4,7 +4,6 @@ const config = {
   testEnvironment: 'node',
   roots: ['<rootDir>/tests'],
   testMatch: ['**/?(*.)spec.ts'],
-  setupFiles: ['dotenv/config'],
   setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts']
 }
 
